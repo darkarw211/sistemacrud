@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" >
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registro de productos </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css"> 
+</head>
+
+<script type="text/javascript">
+    function ConfirmDelete() 
+    {
+        var respuesta = confirm ("¿Desea eliminar este registro?");
+
+        if (respuesta == true)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    function ConfirmEnvio() 
+    {
+        var respuesta = confirm ("¿Desea guardar el registro?");
+
+        if (respuesta == true)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
+
+
+<body>
+    <div class="container" id="registration-form">
+        <div class="image "> </div>
+        <div class="frm p-2 mb-2" style="color: white; background-color: rgb(25, 56, 32);  font-family: Georgia, 
+        'Times New Roman', Times, serif;"> 
+            <h1 align = "center"> Peliculas del año. </h1>
+        </div>
+        &nbsp  &nbsp   &nbsp   &nbsp  
+            <form action ="/add" method="POST" style="color:rgb(25, 56, 32);">
+                <div class="form-group" align= "right">
+                    <button class="btn btn-lg" style="background-color: rgb(25, 56, 32); color: white; font-family: Georgia, 'Times New Roman', 
+                    Times, serif;" onclick="return ConfirmEnvio()"> Guardar pelicula.  </button>
+                </div>
+                <div class="form-group">
+                    <label for="Tipo_Producto"> pelicula:  </label>
+                    <input type="text" name="pelicula" class="form-control" placeholder="pelicula"
+                     required  class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="genero">genero:  </label>
+                    <input type="text" name="genero" class="form-control" placeholder="genero"
+                      required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="nacionalidad">nacionalidad: </label>
+                    <input type="text" name="nacionalidado" class="form-control" placeholder="nacionalidad" 
+                    required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="idioma"> idioma: </label>
+                    <input type="text" name="idioma" class="form-control" placeholder="idioma"
+                     required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="año"> año: </label>
+                    <input type="number" max="200" min="0" name="año" class="form-control"  placeholder="año"
+                    required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="estudio"> estudio: </label>
+                    <input type="text" name="estudio" class="form-control"  placeholder="estudio"
+                     required class="form-control"> 
+                </div>
+            </form>
+            
+            <div class="col-md-20"> 
+                <table class="table table-bordered table-hover" style="color:white ; background-color:silver; border: black;" > 
+                    <thead style="background-color:rgb(25, 56, 32)"> 
+                        <tr>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            pelicula </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            genero </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            nacionalidad  </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" >
+                             idioma </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            año </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            estudio </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                            Eliminar producto </th>
+                        <th style="border-color: black; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;" > 
+                           Actualizar producto </th>
+
+                    </tr> 
+                    </thead>
+                    <tbody> 
+                        <% for (var i = 0; i < Peliculas.length; i++) {  %> 
+                            <tr> 
+                                <td style="border-color: black; text-align: center; color: black;" > <%= i+1 %>  </td>
+                                <td style="border-color: black; color: black;" > <%= Peliculas[i].pelicula %>  </td>
+                                <td style="border-color: black; color: black;"> <%= Peliculas[i].genero  %>  </td>
+                                <td style="border-color: black; color: black;"> <%= Peliculas[i].nacionalidad %>  </td>
+                                <td style="border-color: black; color: black;"> <%= Peliculas[i].idioma  %>  </td>
+                                <td style="border-color: black; color: black;"> <%= Peliculas[i].año %>  </td>
+                                <td style="border-color: black; color: black;"> <%= Peliculas[i].estudio  %>  </td>
+                                <td style="border-color: black; color: black;"> <a class="btn btn-primary btn-xl text-uppercase" style="background-color: rgb(25, 56, 32); border-color: rgb(25, 56, 32);" href='/del/<%= Peliculas[i].id %>' onclick ="return ConfirmDelete()" > Eliminar </a> </td>
+                                <td style="border-color: black; color: black;"> <a class="btn btn-primary btn-xl text-uppercase" style="background-color: rgb(25, 56, 32); border-color: rgb(25, 56, 32);" href='/edit/<%= Peliculas[i].id %>'  > Actualizar  </a> </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+    </div>
+</body>
+</html>
